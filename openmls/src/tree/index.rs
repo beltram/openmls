@@ -29,6 +29,7 @@ impl SecretTreeNodeIndex {
     pub(crate) fn as_usize(self) -> usize {
         self.0 as usize
     }
+    #[cfg_attr(feature = "nightly", mutagen::mutate)]
     pub(crate) fn is_parent(&self) -> bool {
         self.0 % 2 == 1
     }

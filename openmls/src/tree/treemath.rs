@@ -18,6 +18,7 @@ pub(crate) enum TreeMathError {
     InvalidInput,
 }
 
+#[cfg_attr(feature = "nightly", mutagen::mutate)]
 pub(crate) fn log2(x: usize) -> usize {
     if x == 0 {
         return 0;
@@ -29,6 +30,7 @@ pub(crate) fn log2(x: usize) -> usize {
     k - 1
 }
 
+#[cfg_attr(feature = "nightly", mutagen::mutate)]
 pub(crate) fn level(index: SecretTreeNodeIndex) -> usize {
     let x = index.as_usize();
     if (x & 0x01) == 0 {
@@ -41,6 +43,7 @@ pub(crate) fn level(index: SecretTreeNodeIndex) -> usize {
     k
 }
 
+#[cfg_attr(feature = "nightly", mutagen::mutate)]
 pub(crate) fn node_width(n: usize) -> usize {
     if n == 0 {
         0
@@ -49,12 +52,14 @@ pub(crate) fn node_width(n: usize) -> usize {
     }
 }
 
+#[cfg_attr(feature = "nightly", mutagen::mutate)]
 pub(crate) fn root(size: SecretTreeLeafIndex) -> SecretTreeNodeIndex {
     let n = size.as_usize();
     let w = node_width(n);
     SecretTreeNodeIndex::from((1usize << log2(w)) - 1)
 }
 
+#[cfg_attr(feature = "nightly", mutagen::mutate)]
 pub(crate) fn left(index: SecretTreeNodeIndex) -> Result<SecretTreeNodeIndex, TreeMathError> {
     let x = index.as_usize();
     let k = level(SecretTreeNodeIndex::from(x));
@@ -64,6 +69,7 @@ pub(crate) fn left(index: SecretTreeNodeIndex) -> Result<SecretTreeNodeIndex, Tr
     Ok(SecretTreeNodeIndex::from(x ^ (0x01 << (k - 1))))
 }
 
+#[cfg_attr(feature = "nightly", mutagen::mutate)]
 pub(crate) fn right(
     index: SecretTreeNodeIndex,
     size: SecretTreeLeafIndex,
@@ -82,8 +88,10 @@ pub(crate) fn right(
 }
 
 // The parent here might be beyond the right edge of the tree.
+#[cfg_attr(feature = "nightly", mutagen::mutate)]
 pub(crate) fn parent_step(x: usize) -> usize {
-    // We need to use u64 for some of the operations where usize is too small on 32bit platforms
+    // We need to use u64 for some of the operations where usize is too small on
+    // 32bit platforms
     let k = level(SecretTreeNodeIndex::from(x));
     let b = (x as u64 >> (k + 1)) & 0x01;
     let res = (x as u64 | (1 << k)) ^ (b << (k + 1));
@@ -92,6 +100,7 @@ pub(crate) fn parent_step(x: usize) -> usize {
 
 // This function is only safe to use if index <= size.
 // If this is not checked before calling the function, `parent` should be used.
+#[cfg_attr(feature = "nightly", mutagen::mutate)]
 fn try_parent(
     index: SecretTreeNodeIndex,
     size: SecretTreeLeafIndex,
@@ -113,6 +122,7 @@ fn try_parent(
 }
 
 #[inline(always)]
+#[cfg_attr(feature = "nightly", mutagen::mutate)]
 fn leaf_in_tree(
     leaf_index: SecretTreeLeafIndex,
     size: SecretTreeLeafIndex,
@@ -126,6 +136,7 @@ fn leaf_in_tree(
 
 /// Direct path from a leaf node to the root.
 /// Does not include the leaf node but includes the root.
+#[cfg_attr(feature = "nightly", mutagen::mutate)]
 pub(crate) fn leaf_direct_path(
     leaf_index: SecretTreeLeafIndex,
     size: SecretTreeLeafIndex,

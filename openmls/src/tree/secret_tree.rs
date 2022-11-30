@@ -109,6 +109,7 @@ impl SecretTree {
     /// `size`. The inner nodes of the tree and the SenderRatchets only get
     /// initialized when secrets are requested either through `secret()`
     /// or `next_secret()`.
+    #[cfg_attr(feature = "nightly", mutagen::mutate)]
     pub(crate) fn new(
         encryption_secret: EncryptionSecret,
         size: SecretTreeLeafIndex,
@@ -156,6 +157,7 @@ impl SecretTree {
 
     /// Initializes a specific SenderRatchet pair for a given index by
     /// calculating and deleting the appropriate values in the SecretTree
+    #[cfg_attr(feature = "nightly", mutagen::mutate)]
     fn initialize_sender_ratchets(
         &mut self,
         ciphersuite: Ciphersuite,
@@ -250,6 +252,7 @@ impl SecretTree {
     /// Return RatchetSecrets for a given index and generation. This should be
     /// called when decrypting an MlsCiphertext received from another member.
     /// Returns an error if index or generation are out of bound.
+    #[cfg_attr(feature = "nightly", mutagen::mutate)]
     pub(crate) fn secret_for_decryption(
         &mut self,
         ciphersuite: Ciphersuite,
@@ -283,6 +286,7 @@ impl SecretTree {
 
     /// Return the next RatchetSecrets that should be used for encryption and
     /// then increments the generation.
+    #[cfg_attr(feature = "nightly", mutagen::mutate)]
     pub(crate) fn secret_for_encryption(
         &mut self,
         ciphersuite: Ciphersuite,
@@ -304,6 +308,7 @@ impl SecretTree {
 
     /// Returns a mutable reference to a specific SenderRatchet. The
     /// SenderRatchet needs to be initialized.
+    #[cfg_attr(feature = "nightly", mutagen::mutate)]
     fn ratchet_mut(
         &mut self,
         index: SecretTreeLeafIndex,
@@ -321,6 +326,7 @@ impl SecretTree {
     }
 
     /// Returns an optional reference to a specific SenderRatchet
+    #[cfg_attr(feature = "nightly", mutagen::mutate)]
     fn ratchet_opt(
         &self,
         index: SecretTreeLeafIndex,
@@ -338,6 +344,7 @@ impl SecretTree {
 
     /// Derives the secrets for the child leaves in a SecretTree and blanks the
     /// parent leaf.
+    #[cfg_attr(feature = "nightly", mutagen::mutate)]
     fn derive_down(
         &mut self,
         ciphersuite: Ciphersuite,

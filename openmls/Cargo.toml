@@ -26,11 +26,12 @@ getrandom = { version = "0.2", features = ["js"] }
 itertools = { version = "0.10", optional = true }
 openmls_rust_crypto = { version = "0.1.0", path = "../openmls_rust_crypto", optional = true }
 openmls_evercrypt = { version = "0.1.0", path = "../evercrypt_backend", optional = true }
-rstest = {version = "^0.16", optional = true}
-rstest_reuse = {version = "0.4", optional = true}
+rstest = { version = "^0.16", optional = true }
+rstest_reuse = { version = "0.4", optional = true }
 rayon = "^1.5.0"
 thiserror = "^1.0"
 backtrace = "0.3"
+mutagen = { git = "https://github.com/llogiq/mutagen", optional = true }
 
 [features]
 default = []
@@ -39,6 +40,7 @@ test-utils = ["itertools", "openmls_rust_crypto", "rand", "rstest", "rstest_reus
 evercrypt = ["openmls_evercrypt"] # Evercrypt needs to be enabled individually
 crypto-debug = [] # ☣️ Enable logging of sensitive cryptographic information
 content-debug = [] # ☣️ Enable logging of sensitive message content
+nightly = ["mutagen"]
 
 [dev-dependencies]
 criterion = "^0.4"

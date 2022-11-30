@@ -100,6 +100,7 @@ pub(crate) struct RatchetSecret {
 impl RatchetSecret {
     /// Create an initial [`RatchetSecret`] with `generation = 0` from the given
     /// [`Secret`].
+    #[cfg_attr(feature = "nightly", mutagen::mutate)]
     pub(crate) fn initial_ratchet_secret(secret: Secret) -> Self {
         Self {
             secret,
@@ -114,6 +115,7 @@ impl RatchetSecret {
 
     /// Consume this [`RatchetSecret`] to derive a pair of [`RatchetSecrets`],
     /// as well as the [`RatchetSecret`] of the next generation and return both.
+    #[cfg_attr(feature = "nightly", mutagen::mutate)]
     pub(crate) fn ratchet_forward(
         &mut self,
         backend: &impl OpenMlsCryptoProvider,
@@ -171,6 +173,7 @@ pub struct DecryptionRatchet {
 
 impl DecryptionRatchet {
     /// Creates e new SenderRatchet
+    #[cfg_attr(feature = "nightly", mutagen::mutate)]
     pub(crate) fn new(secret: Secret) -> Self {
         Self {
             past_secrets: VecDeque::new(),
@@ -180,12 +183,14 @@ impl DecryptionRatchet {
 
     /// Remove elements from the `past_secrets` queue until it is within the
     /// bounds determined by the [`SenderRatchetConfiguration`].
+    #[cfg_attr(feature = "nightly", mutagen::mutate)]
     fn prune_past_secrets(&mut self, configuration: &SenderRatchetConfiguration) {
         self.past_secrets
             .truncate(configuration.out_of_order_tolerance() as usize)
     }
 
     /// Get the generation of the ratchet head.
+    #[cfg_attr(feature = "nightly", mutagen::mutate)]
     pub(crate) fn generation(&self) -> Generation {
         self.ratchet_head.generation()
     }
@@ -197,6 +202,7 @@ impl DecryptionRatchet {
 
     /// Gets a secret from the SenderRatchet. Returns an error if the generation
     /// is out of bound.
+    #[cfg_attr(feature = "nightly", mutagen::mutate)]
     pub(crate) fn secret_for_decryption(
         &mut self,
         ciphersuite: Ciphersuite,

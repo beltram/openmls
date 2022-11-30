@@ -1,0 +1,296 @@
+cargo +nightly mutagen --features nightly
+warning: patch for `tls_codec` uses the features mechanism. default-features and features will not take effect because the patch dependency does not support this mechanism
+   Compiling openmls v0.4.1 (/Users/beltram/dev/openmls/openmls)
+    Finished test [unoptimized + debuginfo] target(s) in 8.10s
+
+Total mutations: 197
+
+Run 9 tests
+target/debug/deps/test_key_packages-ba813cef77b894a3 ... ok (NOTHING COVERED)
+target/debug/deps/test_decryption_key_index-2d0599773252bc59 ... ok (174/197 covered)
+target/debug/deps/test_managed_api-eb9cd8678a00a0e4 ... ok (174/197 covered)
+target/debug/deps/book_code-0c0f50f41d56fe2a ... ok (174/197 covered)
+target/debug/deps/test_mls_group-3b87a20d4e2227ab ... ok (174/197 covered)
+target/debug/deps/test_interop_scenarios-df54c45a30d47dd2 ... ok (174/197 covered)
+target/debug/deps/test_credentials-e298c97fdb02fc08 ... ok (NOTHING COVERED)
+target/debug/deps/key_store-1c3f8f0328abed64 ... ok (NOTHING COVERED)
+target/debug/deps/openmls-e53b255f8ecda256 ... ok (187/197 covered)
+
+Mutations covered: 187/197
+
+Test 197 Mutants
+1: lit_int, replace `0` with `1`, at src/tree/sender_ratchet.rs@107:25-107:26(fn initial_ratchet_secret) ... killed
+2: binop_eq, replace `==` with `!=`, at src/tree/sender_ratchet.rs@125:28-125:30(fn ratchet_forward) ... killed
+3: lit_str, remove `nonce`, at src/tree/sender_ratchet.rs@130:13-130:20(fn ratchet_forward) ... SURVIVED
+4: lit_str, replace `nonce` with `-nonce`, at src/tree/sender_ratchet.rs@130:13-130:20(fn ratchet_forward) ... SURVIVED
+5: lit_str, replace `nonce` with `nonce-`, at src/tree/sender_ratchet.rs@130:13-130:20(fn ratchet_forward) ... SURVIVED
+6: lit_str, remove `key`, at src/tree/sender_ratchet.rs@137:13-137:18(fn ratchet_forward) ... SURVIVED
+7: lit_str, replace `key` with `-key`, at src/tree/sender_ratchet.rs@137:13-137:18(fn ratchet_forward) ... SURVIVED
+8: lit_str, replace `key` with `key-`, at src/tree/sender_ratchet.rs@137:13-137:18(fn ratchet_forward) ... SURVIVED
+9: lit_str, remove `secret`, at src/tree/sender_ratchet.rs@144:13-144:21(fn ratchet_forward) ... SURVIVED
+10: lit_str, replace `secret` with `-secret`, at src/tree/sender_ratchet.rs@144:13-144:21(fn ratchet_forward) ... SURVIVED
+11: lit_str, replace `secret` with `secret-`, at src/tree/sender_ratchet.rs@144:13-144:21(fn ratchet_forward) ... SURVIVED
+12: lit_int, replace `1` with `2`, at src/tree/sender_ratchet.rs@150:28-150:29(fn ratchet_forward) ... killed
+13: lit_int, replace `1` with `0`, at src/tree/sender_ratchet.rs@150:28-150:29(fn ratchet_forward) ... killed
+14: binop_num, replace `-` with `+`, at src/tree/sender_ratchet.rs@214:41-214:42(fn secret_for_decryption) ... killed
+15: binop_cmp, replace `<` with `<=`, at src/tree/sender_ratchet.rs@214:30-214:31(fn secret_for_decryption) ... SURVIVED
+16: binop_cmp, replace `<` with `>=`, at src/tree/sender_ratchet.rs@214:30-214:31(fn secret_for_decryption) ... killed
+17: binop_cmp, replace `<` with `>`, at src/tree/sender_ratchet.rs@214:30-214:31(fn secret_for_decryption) ... killed
+18: binop_num, replace `+` with `-`, at src/tree/sender_ratchet.rs@215:47-215:48(fn secret_for_decryption) ... killed
+19: binop_cmp, replace `>` with `<`, at src/tree/sender_ratchet.rs@215:27-215:28(fn secret_for_decryption) ... killed
+20: binop_cmp, replace `>` with `<=`, at src/tree/sender_ratchet.rs@215:27-215:28(fn secret_for_decryption) ... killed
+21: binop_cmp, replace `>` with `>=`, at src/tree/sender_ratchet.rs@215:27-215:28(fn secret_for_decryption) ... killed
+22: binop_bool, replace `&&` with `||`, at src/tree/sender_ratchet.rs@215:13-215:15(fn secret_for_decryption) ... killed
+23: binop_cmp, replace `<` with `<=`, at src/tree/sender_ratchet.rs@220:23-220:24(fn secret_for_decryption) ... SURVIVED
+24: binop_cmp, replace `<` with `>=`, at src/tree/sender_ratchet.rs@220:23-220:24(fn secret_for_decryption) ... killed
+25: binop_cmp, replace `<` with `>`, at src/tree/sender_ratchet.rs@220:23-220:24(fn secret_for_decryption) ... killed
+26: binop_num, replace `-` with `+`, at src/tree/sender_ratchet.rs@221:35-221:36(fn secret_for_decryption) ... killed
+27: binop_cmp, replace `>` with `<`, at src/tree/sender_ratchet.rs@221:49-221:50(fn secret_for_decryption) ... killed
+28: binop_cmp, replace `>` with `<=`, at src/tree/sender_ratchet.rs@221:49-221:50(fn secret_for_decryption) ... killed
+29: binop_cmp, replace `>` with `>=`, at src/tree/sender_ratchet.rs@221:49-221:50(fn secret_for_decryption) ... killed
+30: binop_bool, replace `&&` with `||`, at src/tree/sender_ratchet.rs@221:13-221:15(fn secret_for_decryption) ... killed
+31: binop_cmp, replace `>=` with `<`, at src/tree/sender_ratchet.rs@226:23-226:25(fn secret_for_decryption) ... killed
+32: binop_cmp, replace `>=` with `<=`, at src/tree/sender_ratchet.rs@226:23-226:25(fn secret_for_decryption) ... killed
+33: binop_cmp, replace `>=` with `>`, at src/tree/sender_ratchet.rs@226:23-226:25(fn secret_for_decryption) ... killed
+34: lit_int, replace `0` with `1`, at src/tree/sender_ratchet.rs@228:22-228:23(fn secret_for_decryption) ... killed
+35: binop_num, replace `-` with `+`, at src/tree/sender_ratchet.rs@228:37-228:38(fn secret_for_decryption) ... killed
+36: stmt_call, remove `self.past_secrets.push_front(Some(ratchet_secrets)) ;`, at src/tree/sender_ratchet.rs@236:17-236:68(fn secret_for_decryption) ... killed
+37: stmt_call, remove `self.past_secrets.push_front(None) ;`, at src/tree/sender_ratchet.rs@244:13-244:47(fn secret_for_decryption) ... killed
+38: stmt_call, remove `self.prune_past_secrets(configuration) ;`, at src/tree/sender_ratchet.rs@245:13-245:51(fn secret_for_decryption) ... SURVIVED
+39: binop_num, replace `-` with `+`, at src/tree/sender_ratchet.rs@250:52-250:53(fn secret_for_decryption) ... killed
+40: lit_int, replace `1` with `2`, at src/tree/sender_ratchet.rs@250:76-250:77(fn secret_for_decryption) ... killed
+41: lit_int, replace `1` with `0`, at src/tree/sender_ratchet.rs@250:76-250:77(fn secret_for_decryption) ... killed
+42: binop_num, replace `-` with `+`, at src/tree/sender_ratchet.rs@250:74-250:75(fn secret_for_decryption) ... killed
+43: lit_int, replace `0` with `1`, at src/tree/sender_ratchet.rs@253:44-253:45(fn secret_for_decryption) ... killed
+44: binop_cmp, replace `>=` with `<`, at src/tree/sender_ratchet.rs@253:41-253:43(fn secret_for_decryption) ... killed
+45: binop_cmp, replace `>=` with `<=`, at src/tree/sender_ratchet.rs@253:41-253:43(fn secret_for_decryption) ... killed
+46: binop_cmp, replace `>=` with `>`, at src/tree/sender_ratchet.rs@253:41-253:43(fn secret_for_decryption) ... killed
+47: lit_int, replace `2` with `3`, at src/tree/index.rs@34:18-34:19(fn is_parent) ... NOT COVERED
+48: lit_int, replace `2` with `1`, at src/tree/index.rs@34:18-34:19(fn is_parent) ... NOT COVERED
+49: lit_int, replace `1` with `2`, at src/tree/index.rs@34:23-34:24(fn is_parent) ... NOT COVERED
+50: lit_int, replace `1` with `0`, at src/tree/index.rs@34:23-34:24(fn is_parent) ... NOT COVERED
+51: binop_eq, replace `==` with `!=`, at src/tree/index.rs@34:20-34:22(fn is_parent) ... NOT COVERED
+52: lit_int, replace `1` with `2`, at src/tree/secret_tree.rs@119:72-119:73(fn new) ... killed
+53: lit_int, replace `1` with `0`, at src/tree/secret_tree.rs@119:72-119:73(fn new) ... SURVIVED
+54: binop_num, replace `-` with `+`, at src/tree/secret_tree.rs@119:70-119:71(fn new) ... SURVIVED
+55: binop_cmp, replace `>=` with `<`, at src/tree/secret_tree.rs@172:18-172:20(fn initialize_sender_ratchets) ... killed
+56: binop_cmp, replace `>=` with `<=`, at src/tree/secret_tree.rs@172:18-172:20(fn initialize_sender_ratchets) ... killed
+57: binop_cmp, replace `>=` with `>`, at src/tree/secret_tree.rs@172:18-172:20(fn initialize_sender_ratchets) ... SURVIVED
+58: lit_str, remove `Index out of bounds.`, at src/tree/secret_tree.rs@179:21-179:43(fn initialize_sender_ratchets) ... SURVIVED
+59: lit_str, replace `Index out of bounds.` with `-Index out of bounds.`, at src/tree/secret_tree.rs@179:21-179:43(fn initialize_sender_ratchets) ... SURVIVED
+60: lit_str, replace `Index out of bounds.` with `Index out of bounds.-`, at src/tree/secret_tree.rs@179:21-179:43(fn initialize_sender_ratchets) ... SURVIVED
+61: lit_str, remove `Index out of bounds.`, at src/tree/secret_tree.rs@183:25-183:47(fn initialize_sender_ratchets) ... NOT COVERED
+62: lit_str, replace `Index out of bounds.` with `-Index out of bounds.`, at src/tree/secret_tree.rs@183:25-183:47(fn initialize_sender_ratchets) ... NOT COVERED
+63: lit_str, replace `Index out of bounds.` with `Index out of bounds.-`, at src/tree/secret_tree.rs@183:25-183:47(fn initialize_sender_ratchets) ... NOT COVERED
+64: binop_bool, replace `&&` with `||`, at src/tree/secret_tree.rs@181:13-181:15(fn initialize_sender_ratchets) ... SURVIVED
+65: lit_str, remove `initialize_sender_ratchets: Error while computing direct path.`, at src/tree/secret_tree.rs@194:25-194:89(fn initialize_sender_ratchets) ... SURVIVED
+66: lit_str, replace `initialize_sender_ratchets: Error while computing direct path.` with `-initialize_sender_ratchets: Error while computing direct path.`, at src/tree/secret_tree.rs@194:25-194:89(fn initialize_sender_ratchets) ... SURVIVED
+67: lit_str, replace `initialize_sender_ratchets: Error while computing direct path.` with `initialize_sender_ratchets: Error while computing direct path.-`, at src/tree/secret_tree.rs@194:25-194:89(fn initialize_sender_ratchets) ... SURVIVED
+68: stmt_call, remove `dir_path.extend(leaf_direct_path(index, self.size).expect("initialize_sender_ratchets: Error while computing direct path."),) ;`, at src/tree/secret_tree.rs@192:9-195:10(fn initialize_sender_ratchets) ... killed
+69: stmt_call, remove `empty_nodes.push(n) ;`, at src/tree/secret_tree.rs@199:13-199:32(fn initialize_sender_ratchets) ... killed
+70: lit_int, replace `0` with `1`, at src/tree/secret_tree.rs@205:28-205:29(fn initialize_sender_ratchets) ... killed
+71: stmt_call, remove `empty_nodes.remove(0) ;`, at src/tree/secret_tree.rs@205:9-205:30(fn initialize_sender_ratchets) ... killed
+72: stmt_call, remove `empty_nodes.reverse() ;`, at src/tree/secret_tree.rs@206:9-206:30(fn initialize_sender_ratchets) ... killed
+73: lit_str, remove `handshake`, at src/tree/secret_tree.rs@219:51-219:62(fn initialize_sender_ratchets) ... SURVIVED
+74: lit_str, replace `handshake` with `-handshake`, at src/tree/secret_tree.rs@219:51-219:62(fn initialize_sender_ratchets) ... SURVIVED
+75: lit_str, replace `handshake` with `handshake-`, at src/tree/secret_tree.rs@219:51-219:62(fn initialize_sender_ratchets) ... SURVIVED
+76: lit_str, remove `application`, at src/tree/secret_tree.rs@222:13-222:26(fn initialize_sender_ratchets) ... SURVIVED
+77: lit_str, replace `application` with `-application`, at src/tree/secret_tree.rs@222:13-222:26(fn initialize_sender_ratchets) ... SURVIVED
+78: lit_str, replace `application` with `application-`, at src/tree/secret_tree.rs@222:13-222:26(fn initialize_sender_ratchets) ... SURVIVED
+79: lit_int, replace `0` with `1`, at src/tree/secret_tree.rs@223:13-223:14(fn initialize_sender_ratchets) ... SURVIVED
+80: binop_eq, replace `==` with `!=`, at src/tree/secret_tree.rs@227:79-227:81(fn initialize_sender_ratchets) ... killed
+81: binop_cmp, replace `>=` with `<`, at src/tree/secret_tree.rs@273:18-273:20(fn secret_for_decryption) ... killed
+82: binop_cmp, replace `>=` with `<=`, at src/tree/secret_tree.rs@273:18-273:20(fn secret_for_decryption) ... killed
+83: binop_cmp, replace `>=` with `>`, at src/tree/secret_tree.rs@273:18-273:20(fn secret_for_decryption) ... SURVIVED
+84: lit_str, remove `Index out of bounds`, at src/tree/secret_tree.rs@299:25-299:46(fn secret_for_encryption) ... SURVIVED
+85: lit_str, replace `Index out of bounds` with `-Index out of bounds`, at src/tree/secret_tree.rs@299:25-299:46(fn secret_for_encryption) ... SURVIVED
+86: lit_str, replace `Index out of bounds` with `Index out of bounds-`, at src/tree/secret_tree.rs@299:25-299:46(fn secret_for_encryption) ... SURVIVED
+87: stmt_call, remove `self.initialize_sender_ratchets(ciphersuite, backend, index).expect("Index out of bounds") ;`, at src/tree/secret_tree.rs@298:13-299:47(fn secret_for_encryption) ... killed
+88: lit_str, remove `SecretTree not initialized`, at src/tree/secret_tree.rs@325:21-325:49(fn ratchet_mut) ... SURVIVED
+89: lit_str, replace `SecretTree not initialized` with `-SecretTree not initialized`, at src/tree/secret_tree.rs@325:21-325:49(fn ratchet_mut) ... SURVIVED
+90: lit_str, replace `SecretTree not initialized` with `SecretTree not initialized-`, at src/tree/secret_tree.rs@325:21-325:49(fn ratchet_mut) ... SURVIVED
+91: lit_str, remove `derive_down: Error while computing left child.`, at src/tree/secret_tree.rs@367:40-367:88(fn derive_down) ... SURVIVED
+92: lit_str, replace `derive_down: Error while computing left child.` with `-derive_down: Error while computing left child.`, at src/tree/secret_tree.rs@367:40-367:88(fn derive_down) ... SURVIVED
+93: lit_str, replace `derive_down: Error while computing left child.` with `derive_down: Error while computing left child.-`, at src/tree/secret_tree.rs@367:40-367:88(fn derive_down) ... SURVIVED
+94: lit_str, remove `derive_down: Error while computing right child.`, at src/tree/secret_tree.rs@369:21-369:70(fn derive_down) ... SURVIVED
+95: lit_str, replace `derive_down: Error while computing right child.` with `-derive_down: Error while computing right child.`, at src/tree/secret_tree.rs@369:21-369:70(fn derive_down) ... SURVIVED
+96: lit_str, replace `derive_down: Error while computing right child.` with `derive_down: Error while computing right child.-`, at src/tree/secret_tree.rs@369:21-369:70(fn derive_down) ... SURVIVED
+97: lit_str, remove `tree`, at src/tree/secret_tree.rs@370:65-370:71(fn derive_down) ... SURVIVED
+98: lit_str, replace `tree` with `-tree`, at src/tree/secret_tree.rs@370:65-370:71(fn derive_down) ... SURVIVED
+99: lit_str, replace `tree` with `tree-`, at src/tree/secret_tree.rs@370:65-370:71(fn derive_down) ... SURVIVED
+100: lit_str, remove `tree`, at src/tree/secret_tree.rs@371:66-371:72(fn derive_down) ... SURVIVED
+101: lit_str, replace `tree` with `-tree`, at src/tree/secret_tree.rs@371:66-371:72(fn derive_down) ... SURVIVED
+102: lit_str, replace `tree` with `tree-`, at src/tree/secret_tree.rs@371:66-371:72(fn derive_down) ... SURVIVED
+103: lit_int, replace `0` with `1`, at src/tree/treemath.rs@23:13-23:14(fn log2) ... SURVIVED
+104: binop_eq, replace `==` with `!=`, at src/tree/treemath.rs@23:10-23:12(fn log2) ... killed
+105: lit_int, replace `0` with `1`, at src/tree/treemath.rs@24:16-24:17(fn log2) ... NOT COVERED
+106: lit_int, replace `0` with `1`, at src/tree/treemath.rs@26:17-26:18(fn log2) ... SURVIVED
+107: lit_int, replace `0` with `1`, at src/tree/treemath.rs@27:22-27:23(fn log2) ... killed
+108: binop_cmp, replace `>` with `<`, at src/tree/treemath.rs@27:20-27:21(fn log2) ... killed
+109: binop_cmp, replace `>` with `<=`, at src/tree/treemath.rs@27:20-27:21(fn log2) ... killed
+110: binop_cmp, replace `>` with `>=`, at src/tree/treemath.rs@27:20-27:21(fn log2) ... killed
+111: lit_int, replace `1` with `2`, at src/tree/treemath.rs@28:14-28:15(fn log2) ... killed
+112: lit_int, replace `1` with `0`, at src/tree/treemath.rs@28:14-28:15(fn log2) ... killed (timeout)
+113: lit_int, replace `1` with `2`, at src/tree/treemath.rs@30:9-30:10(fn log2) ... killed
+114: lit_int, replace `1` with `0`, at src/tree/treemath.rs@30:9-30:10(fn log2) ... killed
+115: binop_num, replace `-` with `+`, at src/tree/treemath.rs@30:7-30:8(fn log2) ... killed
+116: lit_int, replace `1` with `2`, at src/tree/treemath.rs@36:13-36:17(fn level) ... killed (timeout)
+117: lit_int, replace `1` with `0`, at src/tree/treemath.rs@36:13-36:17(fn level) ... killed (timeout)
+118: binop_bit, replace `&` with `|`, at src/tree/treemath.rs@36:11-36:12(fn level) ... SURVIVED
+119: binop_bit, replace `&` with `^`, at src/tree/treemath.rs@36:11-36:12(fn level) ... killed (timeout)
+120: lit_int, replace `0` with `1`, at src/tree/treemath.rs@36:22-36:23(fn level) ... killed (timeout)
+121: binop_eq, replace `==` with `!=`, at src/tree/treemath.rs@36:19-36:21(fn level) ... killed (timeout)
+122: lit_int, replace `0` with `1`, at src/tree/treemath.rs@37:16-37:17(fn level) ... killed (timeout)
+123: lit_int, replace `0` with `1`, at src/tree/treemath.rs@39:17-39:18(fn level) ... SURVIVED
+124: lit_int, replace `1` with `2`, at src/tree/treemath.rs@40:30-40:34(fn level) ... killed (timeout)
+125: lit_int, replace `1` with `0`, at src/tree/treemath.rs@40:30-40:34(fn level) ... killed (timeout)
+126: binop_bit, replace `&` with `|`, at src/tree/treemath.rs@40:28-40:29(fn level) ... killed (timeout)
+127: binop_bit, replace `&` with `^`, at src/tree/treemath.rs@40:28-40:29(fn level) ... killed (timeout)
+128: lit_int, replace `1` with `2`, at src/tree/treemath.rs@40:39-40:40(fn level) ... killed (timeout)
+129: lit_int, replace `1` with `0`, at src/tree/treemath.rs@40:39-40:40(fn level) ... killed (timeout)
+130: binop_eq, replace `==` with `!=`, at src/tree/treemath.rs@40:36-40:38(fn level) ... killed (timeout)
+131: lit_int, replace `1` with `2`, at src/tree/treemath.rs@41:14-41:15(fn level) ... killed
+132: lit_int, replace `1` with `0`, at src/tree/treemath.rs@41:14-41:15(fn level) ... killed (timeout)
+133: lit_int, replace `0` with `1`, at src/tree/treemath.rs@48:13-48:14(fn node_width) ... SURVIVED
+134: binop_eq, replace `==` with `!=`, at src/tree/treemath.rs@48:10-48:12(fn node_width) ... killed
+135: lit_int, replace `0` with `1`, at src/tree/treemath.rs@49:9-49:10(fn node_width) ... NOT COVERED
+136: lit_int, replace `2` with `3`, at src/tree/treemath.rs@51:9-51:10(fn node_width) ... killed
+137: lit_int, replace `2` with `1`, at src/tree/treemath.rs@51:9-51:10(fn node_width) ... killed
+138: lit_int, replace `1` with `2`, at src/tree/treemath.rs@51:18-51:19(fn node_width) ... killed
+139: lit_int, replace `1` with `0`, at src/tree/treemath.rs@51:18-51:19(fn node_width) ... killed
+140: binop_num, replace `-` with `+`, at src/tree/treemath.rs@51:16-51:17(fn node_width) ... killed
+141: binop_num, replace `*` with `/`, at src/tree/treemath.rs@51:11-51:12(fn node_width) ... killed
+142: lit_int, replace `1` with `2`, at src/tree/treemath.rs@51:23-51:24(fn node_width) ... killed
+143: lit_int, replace `1` with `0`, at src/tree/treemath.rs@51:23-51:24(fn node_width) ... killed
+144: binop_num, replace `+` with `-`, at src/tree/treemath.rs@51:21-51:22(fn node_width) ... killed
+145: lit_int, replace `1` with `2`, at src/tree/treemath.rs@59:32-59:38(fn root) ... killed
+146: lit_int, replace `1` with `0`, at src/tree/treemath.rs@59:32-59:38(fn root) ... killed
+147: lit_int, replace `1` with `2`, at src/tree/treemath.rs@59:53-59:54(fn root) ... killed
+148: lit_int, replace `1` with `0`, at src/tree/treemath.rs@59:53-59:54(fn root) ... killed
+149: binop_num, replace `-` with `+`, at src/tree/treemath.rs@59:51-59:52(fn root) ... killed
+150: lit_int, replace `0` with `1`, at src/tree/treemath.rs@66:13-66:14(fn left) ... killed
+151: binop_eq, replace `==` with `!=`, at src/tree/treemath.rs@66:10-66:12(fn left) ... killed
+152: lit_int, replace `1` with `2`, at src/tree/treemath.rs@69:39-69:43(fn left) ... killed (timeout)
+153: lit_int, replace `1` with `0`, at src/tree/treemath.rs@69:39-69:43(fn left) ... killed (timeout)
+154: lit_int, replace `1` with `2`, at src/tree/treemath.rs@69:52-69:53(fn left) ... killed
+155: lit_int, replace `1` with `0`, at src/tree/treemath.rs@69:52-69:53(fn left) ... killed (timeout)
+156: binop_num, replace `-` with `+`, at src/tree/treemath.rs@69:50-69:51(fn left) ... killed
+157: binop_bit, replace `^` with `&`, at src/tree/treemath.rs@69:36-69:37(fn left) ... killed
+158: binop_bit, replace `^` with `|`, at src/tree/treemath.rs@69:36-69:37(fn left) ... killed (timeout)
+159: lit_int, replace `0` with `1`, at src/tree/treemath.rs@80:13-80:14(fn right) ... killed
+160: binop_eq, replace `==` with `!=`, at src/tree/treemath.rs@80:10-80:12(fn right) ... killed
+161: lit_int, replace `3` with `4`, at src/tree/treemath.rs@83:22-83:26(fn right) ... killed
+162: lit_int, replace `3` with `2`, at src/tree/treemath.rs@83:22-83:26(fn right) ... killed
+163: lit_int, replace `1` with `2`, at src/tree/treemath.rs@83:35-83:36(fn right) ... killed
+164: lit_int, replace `1` with `0`, at src/tree/treemath.rs@83:35-83:36(fn right) ... killed
+165: binop_num, replace `-` with `+`, at src/tree/treemath.rs@83:33-83:34(fn right) ... killed
+166: binop_bit, replace `^` with `&`, at src/tree/treemath.rs@83:19-83:20(fn right) ... killed
+167: binop_bit, replace `^` with `|`, at src/tree/treemath.rs@83:19-83:20(fn right) ... killed
+168: binop_cmp, replace `>=` with `<`, at src/tree/treemath.rs@84:13-84:15(fn right) ... killed
+169: binop_cmp, replace `>=` with `<=`, at src/tree/treemath.rs@84:13-84:15(fn right) ... killed
+170: binop_cmp, replace `>=` with `>`, at src/tree/treemath.rs@84:13-84:15(fn right) ... killed
+171: lit_int, replace `1` with `2`, at src/tree/treemath.rs@96:31-96:32(fn parent_step) ... killed
+172: lit_int, replace `1` with `0`, at src/tree/treemath.rs@96:31-96:32(fn parent_step) ... killed (timeout)
+173: binop_num, replace `+` with `-`, at src/tree/treemath.rs@96:29-96:30(fn parent_step) ... killed
+174: lit_int, replace `1` with `2`, at src/tree/treemath.rs@96:37-96:41(fn parent_step) ... killed
+175: lit_int, replace `1` with `0`, at src/tree/treemath.rs@96:37-96:41(fn parent_step) ... killed
+176: binop_bit, replace `&` with `|`, at src/tree/treemath.rs@96:35-96:36(fn parent_step) ... killed (timeout)
+177: binop_bit, replace `&` with `^`, at src/tree/treemath.rs@96:35-96:36(fn parent_step) ... killed
+178: lit_int, replace `1` with `2`, at src/tree/treemath.rs@97:28-97:29(fn parent_step) ... killed (timeout)
+179: lit_int, replace `1` with `0`, at src/tree/treemath.rs@97:28-97:29(fn parent_step) ... killed (timeout)
+180: binop_bit, replace `|` with `&`, at src/tree/treemath.rs@97:25-97:26(fn parent_step) ... killed (timeout)
+181: binop_bit, replace `|` with `^`, at src/tree/treemath.rs@97:25-97:26(fn parent_step) ... killed (timeout)
+182: lit_int, replace `1` with `2`, at src/tree/treemath.rs@97:50-97:51(fn parent_step) ... killed
+183: lit_int, replace `1` with `0`, at src/tree/treemath.rs@97:50-97:51(fn parent_step) ... killed (timeout)
+184: binop_num, replace `+` with `-`, at src/tree/treemath.rs@97:48-97:49(fn parent_step) ... killed
+185: binop_bit, replace `^` with `&`, at src/tree/treemath.rs@97:37-97:38(fn parent_step) ... killed (timeout)
+186: binop_bit, replace `^` with `|`, at src/tree/treemath.rs@97:37-97:38(fn parent_step) ... killed
+187: binop_eq, replace `==` with `!=`, at src/tree/treemath.rs@110:14-110:16(fn try_parent) ... killed
+188: binop_cmp, replace `>=` with `<`, at src/tree/treemath.rs@114:13-114:15(fn try_parent) ... killed (timeout)
+189: binop_cmp, replace `>=` with `<=`, at src/tree/treemath.rs@114:13-114:15(fn try_parent) ... killed (timeout)
+190: binop_cmp, replace `>=` with `>`, at src/tree/treemath.rs@114:13-114:15(fn try_parent) ... killed
+191: binop_eq, replace `==` with `!=`, at src/tree/treemath.rs@116:18-116:20(fn try_parent) ... killed
+192: binop_cmp, replace `>=` with `<`, at src/tree/treemath.rs@130:19-130:21(fn leaf_in_tree) ... killed
+193: binop_cmp, replace `>=` with `<=`, at src/tree/treemath.rs@130:19-130:21(fn leaf_in_tree) ... killed
+194: binop_cmp, replace `>=` with `>`, at src/tree/treemath.rs@130:19-130:21(fn leaf_in_tree) ... killed
+195: binop_eq, replace `==` with `!=`, at src/tree/treemath.rs@147:19-147:21(fn leaf_direct_path) ... killed
+196: binop_eq, replace `!=` with `==`, at src/tree/treemath.rs@153:13-153:15(fn leaf_direct_path) ... killed
+197: stmt_call, remove `d.push(x) ;`, at src/tree/treemath.rs@155:9-155:18(fn leaf_direct_path) ... killed
+
+SURVIVED
+    src/tree/index.rs
+            all 5 mutants survived
+        47: replace `2` with `3` at 34:18-34:19(fn is_parent) NOT COVERED
+        48: replace `2` with `1` at 34:18-34:19(fn is_parent) NOT COVERED
+        49: replace `1` with `2` at 34:23-34:24(fn is_parent) NOT COVERED
+        50: replace `1` with `0` at 34:23-34:24(fn is_parent) NOT COVERED
+        51: replace `==` with `!=` at 34:20-34:22(fn is_parent) NOT COVERED
+    src/tree/secret_tree.rs
+            39/51(76.47%) mutants survived
+        53: replace `1` with `0` at 119:72-119:73(fn new)
+        54: replace `-` with `+` at 119:70-119:71(fn new)
+        57: replace `>=` with `>` at 172:18-172:20(fn initialize_sender_ratchets)
+        58: remove `Index out of bounds.` at 179:21-179:43(fn initialize_sender_ratchets)
+        59: replace `Index out of bounds.` with `-Index out of bounds.` at 179:21-179:43(fn initialize_sender_ratchets)
+        60: replace `Index out of bounds.` with `Index out of bounds.-` at 179:21-179:43(fn initialize_sender_ratchets)
+        61: remove `Index out of bounds.` at 183:25-183:47(fn initialize_sender_ratchets) NOT COVERED
+        62: replace `Index out of bounds.` with `-Index out of bounds.` at 183:25-183:47(fn initialize_sender_ratchets) NOT COVERED
+        63: replace `Index out of bounds.` with `Index out of bounds.-` at 183:25-183:47(fn initialize_sender_ratchets) NOT COVERED
+        64: replace `&&` with `||` at 181:13-181:15(fn initialize_sender_ratchets)
+        65: remove `initialize_sender_ratchets: Error while computing direct path.` at 194:25-194:89(fn initialize_sender_ratchets)
+        66: replace `initialize_sender_ratchets: Error while computing direct path.` with `-initialize_sender_ratchets: Error while computing direct path.` at 194:25-194:89(fn initialize_sender_ratchets)
+        67: replace `initialize_sender_ratchets: Error while computing direct path.` with `initialize_sender_ratchets: Error while computing direct path.-` at 194:25-194:89(fn initialize_sender_ratchets)
+        73: remove `handshake` at 219:51-219:62(fn initialize_sender_ratchets)
+        74: replace `handshake` with `-handshake` at 219:51-219:62(fn initialize_sender_ratchets)
+        75: replace `handshake` with `handshake-` at 219:51-219:62(fn initialize_sender_ratchets)
+        76: remove `application` at 222:13-222:26(fn initialize_sender_ratchets)
+        77: replace `application` with `-application` at 222:13-222:26(fn initialize_sender_ratchets)
+        78: replace `application` with `application-` at 222:13-222:26(fn initialize_sender_ratchets)
+        79: replace `0` with `1` at 223:13-223:14(fn initialize_sender_ratchets)
+        83: replace `>=` with `>` at 273:18-273:20(fn secret_for_decryption)
+        84: remove `Index out of bounds` at 299:25-299:46(fn secret_for_encryption)
+        85: replace `Index out of bounds` with `-Index out of bounds` at 299:25-299:46(fn secret_for_encryption)
+        86: replace `Index out of bounds` with `Index out of bounds-` at 299:25-299:46(fn secret_for_encryption)
+        88: remove `SecretTree not initialized` at 325:21-325:49(fn ratchet_mut)
+        89: replace `SecretTree not initialized` with `-SecretTree not initialized` at 325:21-325:49(fn ratchet_mut)
+        90: replace `SecretTree not initialized` with `SecretTree not initialized-` at 325:21-325:49(fn ratchet_mut)
+        91: remove `derive_down: Error while computing left child.` at 367:40-367:88(fn derive_down)
+        92: replace `derive_down: Error while computing left child.` with `-derive_down: Error while computing left child.` at 367:40-367:88(fn derive_down)
+        93: replace `derive_down: Error while computing left child.` with `derive_down: Error while computing left child.-` at 367:40-367:88(fn derive_down)
+        94: remove `derive_down: Error while computing right child.` at 369:21-369:70(fn derive_down)
+        95: replace `derive_down: Error while computing right child.` with `-derive_down: Error while computing right child.` at 369:21-369:70(fn derive_down)
+        96: replace `derive_down: Error while computing right child.` with `derive_down: Error while computing right child.-` at 369:21-369:70(fn derive_down)
+        97: remove `tree` at 370:65-370:71(fn derive_down)
+        98: replace `tree` with `-tree` at 370:65-370:71(fn derive_down)
+        99: replace `tree` with `tree-` at 370:65-370:71(fn derive_down)
+        100: remove `tree` at 371:66-371:72(fn derive_down)
+        101: replace `tree` with `-tree` at 371:66-371:72(fn derive_down)
+        102: replace `tree` with `tree-` at 371:66-371:72(fn derive_down)
+    src/tree/sender_ratchet.rs
+            12/46(26.09%) mutants survived
+        3: remove `nonce` at 130:13-130:20(fn ratchet_forward)
+        4: replace `nonce` with `-nonce` at 130:13-130:20(fn ratchet_forward)
+        5: replace `nonce` with `nonce-` at 130:13-130:20(fn ratchet_forward)
+        6: remove `key` at 137:13-137:18(fn ratchet_forward)
+        7: replace `key` with `-key` at 137:13-137:18(fn ratchet_forward)
+        8: replace `key` with `key-` at 137:13-137:18(fn ratchet_forward)
+        9: remove `secret` at 144:13-144:21(fn ratchet_forward)
+        10: replace `secret` with `-secret` at 144:13-144:21(fn ratchet_forward)
+        11: replace `secret` with `secret-` at 144:13-144:21(fn ratchet_forward)
+        15: replace `<` with `<=` at 214:30-214:31(fn secret_for_decryption)
+        23: replace `<` with `<=` at 220:23-220:24(fn secret_for_decryption)
+        38: remove `self.prune_past_secrets(configuration) ;` at 245:13-245:51(fn secret_for_decryption)
+    src/tree/treemath.rs
+            7/95(7.37%) mutants survived
+        103: replace `0` with `1` at 23:13-23:14(fn log2)
+        105: replace `0` with `1` at 24:16-24:17(fn log2) NOT COVERED
+        106: replace `0` with `1` at 26:17-26:18(fn log2)
+        118: replace `&` with `|` at 36:11-36:12(fn level)
+        123: replace `0` with `1` at 39:17-39:18(fn level)
+        133: replace `0` with `1` at 48:13-48:14(fn node_width)
+        135: replace `0` with `1` at 49:9-49:10(fn node_width) NOT COVERED
+
+197 generated mutants
+134(68.02%) mutants killed, 29(14.72%) by timeout
+63(31.98%) mutants SURVIVED, 10(5.08%) NOT COVERED
+Total time: 40m 34s
