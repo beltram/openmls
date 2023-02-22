@@ -1,3 +1,4 @@
+use std::fmt::{Debug, Formatter};
 use tls_codec::{TlsByteVecU16, TlsDeserialize, TlsSerialize, TlsSize};
 
 use super::{Deserialize, Serialize};
@@ -10,10 +11,16 @@ use super::{Deserialize, Serialize};
 ///
 /// A byte vector of length at most 2^16-1.
 #[derive(
-    PartialEq, Clone, Debug, Default, Serialize, Deserialize, TlsSerialize, TlsDeserialize, TlsSize,
+    PartialEq, Clone, Default, Serialize, Deserialize, TlsSerialize, TlsDeserialize, TlsSize,
 )]
 pub struct ExternalKeyIdExtension {
     key_id: TlsByteVecU16,
+}
+
+impl Debug for ExternalKeyIdExtension {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{:x?}", hex::encode(self.key_id.as_slice()))
+    }
 }
 
 impl ExternalKeyIdExtension {

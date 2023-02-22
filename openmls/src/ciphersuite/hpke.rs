@@ -1,11 +1,18 @@
 //! Helper for HPKE
 
 use super::*;
+use std::fmt::{Debug, Formatter};
 
 /// A simple wrapper for HPKE public keys using `Vec<u8>` for (de)serializing.
-#[derive(Debug, Eq, Hash, PartialEq, Clone, Default, Serialize, Deserialize)]
+#[derive(Eq, Hash, PartialEq, Clone, Default, Serialize, Deserialize)]
 pub struct HpkePublicKey {
     value: Vec<u8>,
+}
+
+impl Debug for HpkePublicKey {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{:x?}", hex::encode(self.value.as_slice()))
+    }
 }
 
 impl HpkePublicKey {

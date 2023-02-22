@@ -19,6 +19,7 @@ use openmls_traits::{
     OpenMlsCryptoProvider,
 };
 use serde::{Deserialize, Serialize};
+use std::fmt::{Debug, Formatter};
 use thiserror::Error;
 
 // Private
@@ -138,12 +139,21 @@ impl EncryptedGroupSecrets {
 /// members to update their representation of the state of
 /// the group by applying the proposals and advancing the
 /// key schedule.
-#[derive(
-    Debug, PartialEq, Clone, Serialize, Deserialize, TlsDeserialize, TlsSerialize, TlsSize,
-)]
+#[derive(PartialEq, Clone, Serialize, Deserialize, TlsDeserialize, TlsSerialize, TlsSize)]
 pub(crate) struct Commit {
     pub(crate) proposals: TlsVecU32<ProposalOrRef>,
     pub(crate) path: Option<UpdatePath>,
+}
+
+impl Debug for Commit {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(
+            f,
+            r#"proposals: {:?},
+path: {:#?}"#,
+            self.proposals, self.path
+        )
+    }
 }
 
 impl Commit {

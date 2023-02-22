@@ -3,13 +3,18 @@
 //! This module contains structs for creating signature keys, issuing signatures and verifying them.
 
 use super::*;
+use std::fmt::{Debug, Formatter};
 
 /// Signature.
-#[derive(
-    Debug, PartialEq, Clone, Serialize, Deserialize, TlsDeserialize, TlsSerialize, TlsSize,
-)]
+#[derive(PartialEq, Clone, Serialize, Deserialize, TlsDeserialize, TlsSerialize, TlsSize)]
 pub struct Signature {
     value: TlsByteVecU16,
+}
+
+impl Debug for Signature {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{:x?}", hex::encode(self.value.as_slice()))
+    }
 }
 
 /// A private signature key.
@@ -23,10 +28,22 @@ pub struct SignaturePrivateKey {
 }
 
 /// A public signature key.
-#[derive(Eq, PartialEq, Hash, Debug, Clone, Serialize, Deserialize)]
+#[derive(Eq, PartialEq, Hash, Clone, Serialize, Deserialize)]
 pub struct SignaturePublicKey {
     pub(crate) signature_scheme: SignatureScheme,
     pub(in crate::ciphersuite) value: Vec<u8>,
+}
+
+impl Debug for SignaturePublicKey {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(
+            f,
+            r#"signature_scheme: {:?},
+value: {:X?}"#,
+            self.signature_scheme,
+            hex::encode(self.value.as_slice())
+        )
+    }
 }
 
 /// A signature keypair.

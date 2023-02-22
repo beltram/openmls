@@ -5,6 +5,7 @@
 //! This module contains structs and functions to encrypt and decrypt path
 //! updates for a [`TreeSyncDiff`] instance.
 use std::collections::HashSet;
+use std::fmt::{Debug, Formatter};
 use tls_codec::{TlsDeserialize, TlsSerialize, TlsSize, TlsVecU32};
 
 use openmls_traits::{

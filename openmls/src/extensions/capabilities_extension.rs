@@ -1,3 +1,4 @@
+use std::fmt::{Debug, Formatter};
 use std::io::Read;
 
 use openmls_traits::types::Ciphersuite;
@@ -18,12 +19,48 @@ use crate::{messages::proposals::ProposalType, versions::ProtocolVersion};
 /// be listed.
 ///
 /// This extension is always present in a KeyPackage.
-#[derive(PartialEq, Clone, Debug, Serialize, Deserialize, TlsSize, TlsSerialize)]
+#[derive(PartialEq, Clone, Serialize, Deserialize, TlsSize, TlsSerialize)]
 pub struct CapabilitiesExtension {
     versions: TlsVecU8<ProtocolVersion>,
     ciphersuites: TlsVecU8<Ciphersuite>,
-    pub(crate) extensions: TlsVecU8<ExtensionType>,
     proposals: TlsVecU8<ProposalType>,
+    pub(crate) extensions: TlsVecU8<ExtensionType>,
+}
+
+impl Debug for CapabilitiesExtension {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(
+            f,
+            r#"versions: {:?},
+ciphersuites: {:?},
+proposals: {:?},
+extensions: {:?}"#,
+            self.versions
+                .as_slice()
+                .into_iter()
+                .map(|i| format!("{:?}", i))
+                .collect::<Vec<_>>()
+                .join(", "),
+            self.ciphersuites
+                .as_slice()
+                .into_iter()
+                .map(|i| format!("{:?}", i))
+                .collect::<Vec<_>>()
+                .join(", "),
+            self.proposals
+                .as_slice()
+                .into_iter()
+                .map(|i| format!("{:?}", i))
+                .collect::<Vec<_>>()
+                .join(", "),
+            self.extensions
+                .as_slice()
+                .into_iter()
+                .map(|i| format!("{:?}", i))
+                .collect::<Vec<_>>()
+                .join(", "),
+        )
+    }
 }
 
 fn default_extensions() -> Vec<ExtensionType> {

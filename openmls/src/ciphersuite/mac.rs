@@ -1,13 +1,20 @@
 use super::*;
+use std::fmt::{Debug, Formatter};
 
 /// 9.2 Message framing
 ///
 /// struct {
 ///     opaque mac_value<0..255>;
 /// } MAC;
-#[derive(Debug, Clone, Serialize, Deserialize, TlsDeserialize, TlsSerialize, TlsSize)]
+#[derive(Clone, Serialize, Deserialize, TlsDeserialize, TlsSerialize, TlsSize)]
 pub(crate) struct Mac {
     pub(crate) mac_value: TlsByteVecU8,
+}
+
+impl Debug for Mac {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{:x?}", hex::encode(self.mac_value.as_slice()))
+    }
 }
 
 impl PartialEq for Mac {

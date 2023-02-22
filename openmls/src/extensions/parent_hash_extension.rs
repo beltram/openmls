@@ -1,3 +1,4 @@
+use std::fmt::{Debug, Formatter};
 use tls_codec::{TlsByteVecU8, TlsDeserialize, TlsSerialize, TlsSize};
 
 use super::{Deserialize, Serialize};
@@ -13,10 +14,16 @@ use super::{Deserialize, Serialize};
 /// commit message. If the extension is present, OpenMLS verifies that the
 /// parent hash matches the hash of the leaf's parent node.
 #[derive(
-    PartialEq, Clone, Debug, Default, Serialize, Deserialize, TlsSerialize, TlsDeserialize, TlsSize,
+    PartialEq, Clone, Default, Serialize, Deserialize, TlsSerialize, TlsDeserialize, TlsSize,
 )]
 pub struct ParentHashExtension {
     parent_hash: TlsByteVecU8,
+}
+
+impl Debug for ParentHashExtension {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{:x?}", hex::encode(self.parent_hash.as_slice()))
+    }
 }
 
 impl ParentHashExtension {

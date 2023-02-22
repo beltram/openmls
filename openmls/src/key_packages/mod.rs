@@ -88,6 +88,7 @@ use openmls_traits::{
     OpenMlsCryptoProvider,
 };
 use serde::{Deserialize, Serialize};
+use std::fmt::{Debug, Formatter};
 use tls_codec::{
     Deserialize as TlsDeserializeTrait, Serialize as TlsSerializeTrait, TlsSize, TlsVecU32,
 };

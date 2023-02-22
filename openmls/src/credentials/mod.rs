@@ -36,6 +36,7 @@ use openmls_traits::{
 };
 use serde::{Deserialize, Serialize};
 use std::convert::TryFrom;
+use std::fmt::{Debug, Formatter};
 use std::io::Write;
 #[cfg(test)]
 use tls_codec::Serialize as TlsSerializeTrait;
@@ -332,11 +333,25 @@ impl From<MlsCredentialType> for Credential {
 /// A `BasicCredential` as defined in the MLS protocol spec. It exposes an
 /// `identity` to represent the client, as well as a signature public key, along
 /// with the corresponding signature scheme.
-#[derive(Debug, Clone, Serialize, Deserialize, TlsSerialize, TlsSize)]
+#[derive(Clone, Serialize, Deserialize, TlsSerialize, TlsSize)]
 pub struct BasicCredential {
     pub(crate) identity: TlsByteVecU16,
     pub(crate) signature_scheme: SignatureScheme,
     pub(crate) public_key: SignaturePublicKey,
+}
+
+impl Debug for BasicCredential {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(
+            f,
+            r#"identity: {:x?},
+signature_scheme: {:?},
+public_key: {:?}"#,
+            hex::encode(self.identity.as_slice()),
+            self.signature_scheme,
+            self.public_key,
+        )
+    }
 }
 
 impl BasicCredential {

@@ -7,6 +7,7 @@ mod group_context;
 use crate::ciphersuite::*;
 use crate::extensions::*;
 use crate::utils::*;
+use std::fmt::{Debug, Formatter};
 
 use openmls_traits::OpenMlsCryptoProvider;
 use serde::{Deserialize, Serialize};
@@ -43,10 +44,16 @@ pub use proposals::*;
 
 /// A group ID. The group ID is chosen by the creator of the group and should be globally unique.
 #[derive(
-    Hash, Eq, Debug, PartialEq, Clone, Serialize, Deserialize, TlsSerialize, TlsDeserialize, TlsSize,
+    Hash, Eq, PartialEq, Clone, Serialize, Deserialize, TlsSerialize, TlsDeserialize, TlsSize,
 )]
 pub struct GroupId {
     value: TlsByteVecU8,
+}
+
+impl Debug for GroupId {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{:x?}", hex::encode(self.value.as_slice()))
+    }
 }
 
 impl GroupId {
@@ -82,7 +89,6 @@ impl GroupId {
 /// Group epoch. Internally this is stored as a `u64`.
 /// The group epoch is incremented with every valid Commit that is merged into the group state.
 #[derive(
-    Debug,
     PartialEq,
     Copy,
     Clone,
@@ -94,6 +100,12 @@ impl GroupId {
     TlsSize,
 )]
 pub struct GroupEpoch(u64);
+
+impl Debug for GroupEpoch {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.0)
+    }
+}
 
 impl GroupEpoch {
     /// Increment the group epoch by 1.

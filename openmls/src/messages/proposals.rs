@@ -18,7 +18,7 @@ use crate::{
 use openmls_traits::{types::Ciphersuite, OpenMlsCryptoProvider};
 use serde::{Deserialize, Serialize};
 use std::convert::TryFrom;
-use std::fmt::Formatter;
+use std::fmt::{Debug, Formatter};
 use tls_codec::{
     Serialize as TlsSerializeTrait, TlsByteVecU16, TlsDeserialize, TlsSerialize, TlsSize, TlsVecU32,
 };
@@ -98,7 +98,7 @@ impl std::fmt::Display for ProposalType {
 ///
 /// This `enum` contains the different proposals in its variants.
 #[allow(clippy::large_enum_variant)]
-#[derive(Debug, PartialEq, Clone, Serialize, Deserialize)]
+#[derive(PartialEq, Clone, Serialize, Deserialize)]
 #[allow(missing_docs)]
 pub enum Proposal {
     Add(AddProposal),
@@ -109,6 +109,21 @@ pub enum Proposal {
     ExternalInit(ExternalInitProposal),
     AppAck(AppAckProposal),
     GroupContextExtensions(GroupContextExtensionProposal),
+}
+
+impl Debug for Proposal {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Proposal::Add(p) => write!(f, "{:#?}", p),
+            Proposal::Update(p) => write!(f, "{:#?}", p),
+            Proposal::Remove(p) => write!(f, "{:#?}", p),
+            Proposal::PreSharedKey(p) => write!(f, "{:#?}", p),
+            Proposal::ReInit(p) => write!(f, "{:#?}", p),
+            Proposal::ExternalInit(p) => write!(f, "{:#?}", p),
+            Proposal::AppAck(p) => write!(f, "{:#?}", p),
+            Proposal::GroupContextExtensions(p) => write!(f, "{:#?}", p),
+        }
+    }
 }
 
 impl Proposal {

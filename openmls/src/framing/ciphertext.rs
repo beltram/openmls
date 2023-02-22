@@ -1,4 +1,5 @@
 use openmls_traits::{types::Ciphersuite, OpenMlsCryptoProvider};
+use std::fmt::{Debug, Formatter};
 use tls_codec::{
     Deserialize, Serialize, Size, TlsByteSliceU16, TlsByteVecU16, TlsByteVecU32, TlsByteVecU8,
     TlsDeserialize, TlsSerialize, TlsSize,
@@ -18,7 +19,7 @@ use super::*;
 /// `MlsCiphertext` is the framing struct for an encrypted `MlsPlaintext`.
 /// This message format is meant to be sent to and received from the Delivery
 /// Service.
-#[derive(Debug, PartialEq, Clone, TlsSerialize, TlsSize)]
+#[derive(PartialEq, Clone, TlsSerialize, TlsSize)]
 pub(crate) struct MlsCiphertext {
     wire_format: WireFormat,
     group_id: GroupId,
@@ -27,6 +28,28 @@ pub(crate) struct MlsCiphertext {
     authenticated_data: TlsByteVecU32,
     encrypted_sender_data: TlsByteVecU8,
     ciphertext: TlsByteVecU32,
+}
+
+impl Debug for MlsCiphertext {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(
+            f,
+            r#"wire_format: {:?},
+group_id: {:?},
+epoch: {:?},
+content_type: {:?},
+authenticated_data: {:x?},
+encrypted_sender_data: {:x?},
+ciphertext: {:x?}"#,
+            self.wire_format,
+            self.group_id,
+            self.epoch,
+            self.content_type,
+            hex::encode(self.authenticated_data.as_slice()),
+            hex::encode(self.encrypted_sender_data.as_slice()),
+            hex::encode(self.ciphertext.as_slice()),
+        )
+    }
 }
 
 pub(crate) struct MlsMessageHeader {

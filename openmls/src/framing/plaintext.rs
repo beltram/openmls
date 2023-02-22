@@ -16,6 +16,7 @@ use crate::{
 use super::*;
 use openmls_traits::OpenMlsCryptoProvider;
 use std::convert::TryFrom;
+use std::fmt::{Debug, Formatter};
 use tls_codec::{Serialize, TlsByteVecU32, TlsDeserialize, TlsSerialize, TlsSize};
 
 /// `MLSPlaintext` is a framing structure for MLS messages. It can contain
@@ -387,11 +388,23 @@ impl ContentType {
 }
 
 #[allow(clippy::large_enum_variant)]
-#[derive(Debug, PartialEq, Clone, Serialize, Deserialize)]
+#[derive(PartialEq, Clone, Serialize, Deserialize)]
 pub(crate) enum MlsPlaintextContentType {
     Application(TlsByteVecU32),
     Proposal(Proposal),
     Commit(Commit),
+}
+
+impl Debug for MlsPlaintextContentType {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        match self {
+            MlsPlaintextContentType::Application(msg) => {
+                write!(f, "{:x?}", hex::encode(msg.as_slice()))
+            }
+            MlsPlaintextContentType::Proposal(p) => write!(f, "{:#?}", p),
+            MlsPlaintextContentType::Commit(c) => write!(f, "{:#?}", c),
+        }
+    }
 }
 
 impl From<MlsPlaintext> for MlsPlaintextContentType {
@@ -442,7 +455,7 @@ impl<'a> MlsPlaintextTbmPayload<'a> {
 )]
 pub(crate) struct MembershipTag(pub(crate) Mac);
 
-#[derive(PartialEq, Debug, Clone)]
+#[derive(PartialEq, Clone)]
 pub(crate) struct MlsPlaintextTbs {
     pub(super) serialized_context: Option<Vec<u8>>,
     pub(super) wire_format: WireFormat,
@@ -452,6 +465,33 @@ pub(crate) struct MlsPlaintextTbs {
     pub(super) authenticated_data: TlsByteVecU32,
     pub(super) content_type: ContentType,
     pub(crate) payload: MlsPlaintextContentType,
+}
+
+impl Debug for MlsPlaintextTbs {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(
+            f,
+            r#"serialized_context: {:?},
+wire_format: {:?},
+group_id: {:?},
+epoch: {:?},
+sender: {:?},
+authenticated_data: {:x?},
+content_type: {:?},
+payload: {:?}"#,
+            self.serialized_context
+                .as_ref()
+                .map(|c| hex::encode(c))
+                .unwrap_or_default(),
+            self.wire_format,
+            self.group_id,
+            self.epoch,
+            self.sender,
+            hex::encode(self.authenticated_data.as_slice()),
+            self.content_type,
+            self.payload,
+        )
+    }
 }
 
 fn encode_tbs<'a>(
@@ -473,12 +513,28 @@ fn encode_tbs<'a>(
     Ok(out)
 }
 
-#[derive(PartialEq, Debug, Clone)]
+#[derive(PartialEq, Clone)]
 pub(crate) struct VerifiableMlsPlaintext {
     pub(crate) tbs: MlsPlaintextTbs,
     pub(super) signature: Signature,
     pub(super) confirmation_tag: Option<ConfirmationTag>,
     pub(super) membership_tag: Option<MembershipTag>,
+}
+
+impl Debug for VerifiableMlsPlaintext {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        write!(
+            f,
+            r#"tbs: {:#?},
+signature: {:?},
+confirmation_tag: {:?},
+membership_tag: {:?}"#,
+            self.tbs,
+            self.signature,
+            self.confirmation_tag.as_ref().map(|t| &t.0),
+            self.membership_tag.as_ref().map(|t| &t.0),
+        )
+    }
 }
 
 impl VerifiableMlsPlaintext {
