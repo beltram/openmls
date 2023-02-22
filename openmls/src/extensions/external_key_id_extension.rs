@@ -19,7 +19,7 @@ pub struct ExternalKeyIdExtension {
 
 impl Debug for ExternalKeyIdExtension {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{:x?}", hex::encode(self.key_id.as_slice()))
+        write!(f, "{:?}", hex::encode(self.key_id.as_slice()))
     }
 }
 

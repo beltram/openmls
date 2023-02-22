@@ -399,7 +399,7 @@ impl Debug for MlsPlaintextContentType {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
             MlsPlaintextContentType::Application(msg) => {
-                write!(f, "{:x?}", hex::encode(msg.as_slice()))
+                write!(f, "{:?}", hex::encode(msg.as_slice()))
             }
             MlsPlaintextContentType::Proposal(p) => write!(f, "{:#?}", p),
             MlsPlaintextContentType::Commit(c) => write!(f, "{:#?}", c),
@@ -476,7 +476,7 @@ wire_format: {:?},
 group_id: {:?},
 epoch: {:?},
 sender: {:?},
-authenticated_data: {:x?},
+authenticated_data: {:?},
 content_type: {:?},
 payload: {:?}"#,
             self.serialized_context

@@ -344,7 +344,7 @@ impl Debug for BasicCredential {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         write!(
             f,
-            r#"identity: {:x?},
+            r#"identity: {:?},
 signature_scheme: {:?},
 public_key: {:?}"#,
             hex::encode(self.identity.as_slice()),

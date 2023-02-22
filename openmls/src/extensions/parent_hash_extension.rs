@@ -22,7 +22,7 @@ pub struct ParentHashExtension {
 
 impl Debug for ParentHashExtension {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{:x?}", hex::encode(self.parent_hash.as_slice()))
+        write!(f, "{:?}", hex::encode(self.parent_hash.as_slice()))
     }
 }
 

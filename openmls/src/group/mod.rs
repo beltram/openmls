@@ -52,7 +52,7 @@ pub struct GroupId {
 
 impl Debug for GroupId {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{:x?}", hex::encode(self.value.as_slice()))
+        write!(f, "{:?}", hex::encode(self.value.as_slice()))
     }
 }
 
@@ -89,15 +89,7 @@ impl GroupId {
 /// Group epoch. Internally this is stored as a `u64`.
 /// The group epoch is incremented with every valid Commit that is merged into the group state.
 #[derive(
-    PartialEq,
-    Copy,
-    Clone,
-    Hash,
-    Serialize,
-    Deserialize,
-    TlsDeserialize,
-    TlsSerialize,
-    TlsSize,
+    PartialEq, Copy, Clone, Hash, Serialize, Deserialize, TlsDeserialize, TlsSerialize, TlsSize,
 )]
 pub struct GroupEpoch(u64);
 

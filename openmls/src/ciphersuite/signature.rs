@@ -13,7 +13,7 @@ pub struct Signature {
 
 impl Debug for Signature {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{:x?}", hex::encode(self.value.as_slice()))
+        write!(f, "{:?}", hex::encode(self.value.as_slice()))
     }
 }
 
@@ -39,7 +39,7 @@ impl Debug for SignaturePublicKey {
         write!(
             f,
             r#"signature_scheme: {:?},
-value: {:X?}"#,
+value: {:?}"#,
             self.signature_scheme,
             hex::encode(self.value.as_slice())
         )

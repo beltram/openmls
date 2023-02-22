@@ -11,7 +11,7 @@ pub struct HpkePublicKey {
 
 impl Debug for HpkePublicKey {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{:x?}", hex::encode(self.value.as_slice()))
+        write!(f, "{:?}", hex::encode(self.value.as_slice()))
     }
 }
 
