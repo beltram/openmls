@@ -219,11 +219,17 @@ pub enum HpkeAeadType {
 /// } HPKECiphertext;
 /// ```
 #[derive(
-    Debug, PartialEq, Clone, Serialize, Deserialize, TlsSerialize, TlsDeserialize, TlsSize,
+    PartialEq, Clone, Serialize, Deserialize, TlsSerialize, TlsDeserialize, TlsSize,
 )]
 pub struct HpkeCiphertext {
     pub kem_output: TlsByteVecU16,
     pub ciphertext: TlsByteVecU16,
+}
+
+impl std::fmt::Debug for HpkeCiphertext {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "kem: {:#?}, ciphertext: {:#?}", hex::encode(self.kem_output.as_slice()), hex::encode(self.ciphertext.as_slice()))
+    }
 }
 
 /// Helper holding a (private, public) key pair as byte vectors.

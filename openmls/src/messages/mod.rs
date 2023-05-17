@@ -47,12 +47,25 @@ use crate::schedule::psk::{ExternalPsk, PreSharedKeyId, Psk};
 /// This message is generated when a new member is added to a group.
 /// The invited member can use this message to join the group using
 /// [`MlsGroup::new_from_welcome()`](crate::group::mls_group::MlsGroup::new_from_welcome()).
-#[derive(Clone, Debug, PartialEq, TlsDeserialize, TlsSerialize, TlsSize)]
+#[derive(Clone, PartialEq, TlsDeserialize, TlsSerialize, TlsSize)]
 pub struct Welcome {
     version: ProtocolVersion,
     cipher_suite: Ciphersuite,
     secrets: TlsVecU32<EncryptedGroupSecrets>,
     encrypted_group_info: TlsByteVecU32,
+}
+
+impl std::fmt::Debug for Welcome {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(
+            f,
+            "version: {:#?},\nciphersuite: {:#?},\nsecrets: {:#?},\ngroup_info: : {:#?}",
+            self.version,
+            self.cipher_suite,
+            self.secrets,
+            hex::encode(self.encrypted_group_info.clone().into_vec())
+        )
+    }
 }
 
 impl Welcome {
